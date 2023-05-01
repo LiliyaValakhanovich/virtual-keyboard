@@ -8,30 +8,46 @@ function createKeyBoard() {
 
 createKeyBoard();
 
-const keyboard = ['~ `', '! 1', '@ 2', '# 3', '$ 4', '% 5', '^ 6', '& 7', '* 8', '( 9', ') 0', '_ -', ' + =', 'Backspace', 'Tab', 'q', 'w', 'e', 'r', 't', 'y',
-                     'u', 'i', 'o', 'p', '[', ']', '\\', 'CapsLk', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'Enter',
-                     'Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'ArrowUp', 'Shift', 'Ctrl', 'Win', 'Alt', ' ', 'Alt',
-                     'Ctrl', 'ArrowLeft', 'ArrowDown', 'ArrowRight'];
-document.onkeydown = function (event) {
+const keyboard = [{ kod: 'Backquote', value: '`' }, { kod: 'Digit1', value: '1' }, { kod: 'Digit2', value: '2' }, { kod: 'Digit3', value: '3' },
+  { kod: 'Digit4', value: '4'}, { kod: 'Digit5', value: '5' }, { kod: 'Digit6', value: '6' }, { kod: 'Digit7', value: '7' }, { kod: 'Digit8', value: '8' },
+  { kod: 'Digit9', value: '9' }, { kod: 'Digit0', value: '0' }, { kod: 'Minus', value: '-' }, { kod: 'Equal', value: '=' }, { kod: 'Backspace', value: 'Backspace' },
+  { kod: 'Tab', value: 'Tab' }, { kod: 'KeyQ', value: 'q' }, { kod: 'KeyW', value: 'w' }, { kod: 'KeyE', value: 'e' }, { kod: 'KeyR', value: 'r' },
+  { kod: 'KeyT', value: 't' }, { kod: 'KeyY', value: 'y' }, { kod: 'KeyU', value: 'u' }, { kod: 'KeyI', value: 'i' }, { kod: 'KeyO', value: 'o' },
+  { kod: 'KeyP', value: 'p' }, { kod: 'BracketLeft', value: '[' }, { kod: 'BracketRight', value: ']' }, { kod: 'Backslash', value: '\\' },
+  { kod: 'CapsLock', value: 'CapsLock' }, { kod: 'KeyA', value: 'a' }, { kod: 'KeyS', value: 's' }, { kod: 'KeyD', value: 'd' },
+  { kod: 'KeyF', value: 'f' }, { kod: 'KeyG', value: 'g' }, { kod: 'KeyH', value: 'h' }, { kod: 'KeyJ', value: 'j' }, { kod: 'KeyK', value: 'k'},
+  { kod: 'KeyL', value: 'l' }, { kod: 'Semicolon', value: ';' }, { kod: 'Quote', value: "'" }, { kod: 'Enter', value: 'Enter' },
+  { kod: 'ShiftLeft', value: 'Shift' }, { kod: 'KeyZ', value: 'z' }, { kod: 'KeyX', value: 'x' }, { kod: 'KeyC', value: 'c' },
+  { kod: 'KeyV', value: 'v'}, { kod: 'KeyB', value: 'b' }, { kod: 'KeyN', value: 'n' }, { kod: 'KeyM', value: 'm' }, { kod: 'Comma', value: ','},
+  { kod: 'Period', value: '.' }, { kod: 'Slash', value: '/' }, { kod: 'ArrowUp', value: 'ArrowUp' }, { kod: 'ShiftRight', value: 'Shift' },
+  { kod: 'ControlLeft', value: 'Ctrl' }, { kod: 'MetaLeft', value: 'Meta' }, { kod: 'AltLeft', value: 'Alt' }, { kod: 'Space', value: ' ' },
+  { kod: 'AltRight', value: 'Alt' }, { kod: 'ControlRight', value: 'Ctrl' }, { kod: 'ArrowLeft', value: 'ArrowLeft' }, { kod: 'ArrowDown', value: 'ArrowDown' },
+  { kod: 'ArrowRight', value: 'ArrowRight' }];
+ 
+/*document.onkeydown = function (event) {
   console.log(event);
   console.log(event.code);
-  /*keyboard.push(event.key);
-  console.log(keyboard);*/
-}
+  const el = {
+    kod: event.code,
+    value: event.key,
+  };
+  keyboard.push(el);
+  console.log(keyboard);
+}*/
 
 function init() {
   let out = "";
   for (let i = 0; i < keyboard.length; i += 1) {
-    if (keyboard[i] === "ArrowUp") {
-      out += "<div class = 'pul'><div class = 'up'></div></div>";
-    } else if (keyboard[i] === "ArrowDown") {
-      out += "<div class = 'pul'><div class = 'down'></div></div>";
-    } else if (keyboard[i] === "ArrowLeft") {
-      out += "<div class = 'pul'><div class = 'left'></div></div>";
-    } else if (keyboard[i] === "ArrowRight") {
-      out += "<div class = 'pul'><div class = 'right'></div></div>";
+    if (keyboard[i].value === "ArrowUp") {
+      out += `<div class = 'pul' data = '${keyboard[i].kod}'><div class = 'up'></div></div>`;
+    } else if (keyboard[i].value === "ArrowDown") {
+      out += `<div class = 'pul' data = '${keyboard[i].kod}'><div class = 'down'></div></div>`;
+    } else if (keyboard[i].value === "ArrowLeft") {
+      out += `<div class = 'pul' data = '${keyboard[i].kod}'><div class = 'left'></div></div>`;
+    } else if (keyboard[i].value === "ArrowRight") {
+      out += `<div class = 'pul' data = '${keyboard[i].kod}'><div class = 'right'></div></div>`;
     } else {
-      out += `<div class = 'pul'>${keyboard[i]}</div>`;
+      out += `<div class = 'pul' data = '${keyboard[i].kod}'>${keyboard[i].value}</div>`;
     }
   }
   document.querySelector(".inner").innerHTML = out;

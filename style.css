@@ -109,3 +109,7 @@
   border: 10px solid transparent;
   border-left: 10px solid black;
 }
+
+.active {
+  background-color: rgb(83, 83, 245);
+}

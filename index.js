@@ -47,23 +47,6 @@ init();
 const inner = document.querySelector(".inner");
 const text = document.querySelector(".screen");
 text.textContent = "";
-inner.addEventListener("click", heandlerClick);
-
-document.addEventListener("keydown", (event) => {
-  console.log(event.key);
-  document.querySelectorAll(".pul").forEach((element) => {
-    element.classList.remove("active");
-  });
-  console.log(event.target);
-  document.querySelector(`.pul[data-kod = ${event.code}]`).classList.add("active");
-  if (event.key === "Backspace") {
-    text.textContent = text.textContent.slice(0, text.textContent.length - 1);
-  } else if (event.key === "Tab") {
-    text.textContent += "  ";
-  } else {
-    text.textContent += event.key;
-  }
-});
 
 function heandlerClick(event) {
   document.querySelectorAll(".pul").forEach((element) => {
@@ -82,3 +65,19 @@ function heandlerClick(event) {
     text.textContent += event.target.textContent;
   } 
 }
+
+inner.addEventListener("click", heandlerClick);
+
+document.addEventListener("keydown", (event) => {
+  document.querySelectorAll(".pul").forEach((element) => {
+    element.classList.remove("active");
+  });
+  document.querySelector(`.pul[data-kod = ${event.code}]`).classList.add("active");
+  if (event.key === "Backspace") {
+    text.textContent = text.textContent.slice(0, text.textContent.length - 1);
+  } else if (event.key === "Tab") {
+    text.textContent += "  ";
+  } else {
+    text.textContent += event.key;
+  }
+});

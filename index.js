@@ -79,6 +79,10 @@ document.addEventListener("keydown", (event) => {
     text.textContent = text.textContent.slice(0, text.textContent.length - 1);
   } else if (event.key === "Tab") {
     text.textContent += "  ";
+  } else if (event.key === "Enter") {
+    text.textContent += "\n";
+  } else if (event.key === "Shift" && event.key.match(/[a-z]/g)) {
+    text.textContent += event.key.match(/[a-z]/g).toUpperCase();
   } else {
     text.textContent += event.key;
   }

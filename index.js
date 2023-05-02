@@ -59,11 +59,13 @@ function heandlerClick(event) {
 
   if (event.target.textContent === "Backspace") {
     text.textContent = text.textContent.slice(0, text.textContent.length - 1);
+  } else if (event.target.textContent === "Enter") {
+    text.textContent += "\n";
   } else if (event.target.textContent === "Tab") {
     text.textContent += "  ";
   } else {
     text.textContent += event.target.textContent;
-  } 
+  }
 }
 
 inner.addEventListener("click", heandlerClick);

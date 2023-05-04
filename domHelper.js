@@ -40,6 +40,9 @@ function createInput() {
 }
 
 function createBoard() {
-  const innerEl = createElement("div", ["inner"]);
-  return innerEl;
-} 
+  return createElement("div", ["inner"]);
+}
+
+function createWrapper() {
+  return createElement("div", ["wrapper"]);
+}

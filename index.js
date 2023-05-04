@@ -1,9 +1,11 @@
-const wrapper = document.querySelector(".wrapper");
+const parent = document.querySelector(".body");
 
 function createKeyBoard() {
   const input = createInput();
   const board = createBoard();
+  const wrapper = createWrapper();
   wrapper.append(input, board);
+  parent.append(wrapper);
 }
 
 createKeyBoard();
@@ -40,22 +42,30 @@ const keyboardRus = [{ kod: "Backquote", value: "`", symbol: "~" }, { kod: "Digi
   { kod: "AltRight", value: "Alt" }, { kod: "ControlRight", value: "Ctrl" }, { kod: "ArrowLeft", value: "ArrowLeft" }, { kod: "ArrowDown", value: "ArrowDown" },
   { kod: "ArrowRight", value: "ArrowRight" }];
 
+const inner = document.querySelector(".inner");
+const text = document.querySelector(".screen");
+text.textContent = "";
+
 function init() {
   let out = "";
   for (let i = 0; i < keyboard.length; i += 1) {
     if (keyboard[i].value === "ArrowUp") {
       out += `<div class = 'pul' data-kod = '${keyboard[i].kod}'><div class = 'up'></div></div>`;
+      inner.innerHTML = out;
     } else if (keyboard[i].value === "ArrowDown") {
       out += `<div class = 'pul' data-kod = '${keyboard[i].kod}'><div class = 'down'></div></div>`;
+      inner.innerHTML = out;
     } else if (keyboard[i].value === "ArrowLeft") {
       out += `<div class = 'pul' data-kod = '${keyboard[i].kod}'><div class = 'left'></div></div>`;
+      inner.innerHTML = out;
     } else if (keyboard[i].value === "ArrowRight") {
       out += `<div class = 'pul' data-kod = '${keyboard[i].kod}'><div class = 'right'></div></div>`;
+      inner.innerHTML = out;
     } else {
       out += `<div class = 'pul' data-kod = '${keyboard[i].kod}'>${keyboard[i].value}</div>`;
+      inner.innerHTML = out;
     }
   }
-  document.querySelector(".inner").innerHTML = out;
 }
 
 init();
@@ -75,15 +85,10 @@ function replaceLanguage() {
       out += `<div class = 'pul' data-kod = '${keyboardRus[i].kod}'>${keyboardRus[i].value}</div>`;
     }
   }
-  document.querySelector(".inner").innerHTML = out; 
+  document.querySelector(".inner").innerHtml = out;
 }
 
-const inner = document.querySelector(".inner");
-const text = document.querySelector(".screen");
-text.textContent = "";
-
 function heandlerClick(event) {
-  console.log(event.target.dataset);
   document.querySelectorAll(".pul").forEach((element) => {
     element.classList.remove("active");
   });
@@ -109,7 +114,6 @@ document.addEventListener("keydown", (event) => {
     element.classList.remove("active");
   });
   document.querySelector(`.pul[data-kod = ${event.code}]`).classList.add("active");
-  console.log(event);
   if (event.key === "Backspace") {
     text.textContent = text.textContent.slice(0, text.textContent.length - 1);
   } else if (event.key === "Tab") {
@@ -117,7 +121,7 @@ document.addEventListener("keydown", (event) => {
   } else if (event.key === "Enter") {
     text.textContent += "\n";
   } else if (event.key === "Shift" && event.key.match(/[a-z]/g)) {
-    text.textContent += event.key.match(/[a-z]/g).toUpperCase();
+    text.textContent += "";
   } else if (event.key === "Alt" && event.key === "Shift") {
     replaceLanguage();
   } else {
